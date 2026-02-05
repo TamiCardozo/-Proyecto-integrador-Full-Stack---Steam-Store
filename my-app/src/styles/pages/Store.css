@@ -1,0 +1,82 @@
+.store-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1rem 5rem;
+  background: #fff;
+}
+
+/* SECCIONES */
+
+.store-section {
+  margin-bottom: 4rem;
+}
+
+.store-section h3 {
+  font-size: 1.7rem;
+  margin-bottom: 1.2rem;
+}
+
+/* CAJA DEL CARRUSEL */
+
+.carousel-box {
+  position: relative;
+}
+
+/* TRACK */
+
+.carousel-track {
+  display: flex;
+  gap: 1.8rem;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+
+.carousel-item {
+  flex: 0 0 260px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 22px rgba(0,0,0,.1);
+  padding: 1rem;
+}
+
+/* FLECHAS */
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,.8);
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.arrow.left {
+  left: -20px;
+}
+
+.arrow.right {
+  right: -20px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .carousel-item {
+    flex: 0 0 200px;
+  }
+
+  .arrow {
+    display: none;
+  }
+
+  .carousel-track {
+    overflow-x: auto;
+  }
+}

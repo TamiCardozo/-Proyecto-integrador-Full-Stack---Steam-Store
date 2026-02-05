@@ -1,0 +1,142 @@
+:root {
+  --primary-dark-transparent: #37353E;
+  --primary-color: #F8DE22;
+  --primary-light: #FEF3E2;
+  --primary-dark: #000000; 
+  --secondary-color: #FFC107; 
+  --secondary-light: #D6D85D; 
+  --secondary-dark: #44444E; 
+  --light: #F9F5F0; 
+  --dark-transparent: rgba(16, 16, 16, .3);
+  --dark: #212121;
+
+  --font-bar: 'Barlow', sans-serif;
+  --font-nun: 'Nunito', sans-serif;
+  --font-asap: 'Asap', sans-serif;
+}
+
+
+.header {
+  width: 100%;
+  background: var(--primary-dark);
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(255, 193, 7, 0.2);
+  font-family: var(--font-bar);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.nav-desktop a {
+  color: var(--light);
+  margin: 0 1rem;
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-desktop a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--secondary-color);
+  transition: width 0.3s ease;
+}
+
+.nav-desktop a:hover {
+  color: var(--secondary-color);
+}
+
+.nav-desktop a:hover::after {
+  width: 100%;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: var(--light);
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger:hover span {
+  background: var(--secondary-color);
+}
+
+
+.nav-mobile {
+  display: none;
+  flex-direction: column;
+  background: var(--dark);
+  position: absolute;
+  top: 70px;
+  right: 0;
+  width: 200px;
+  padding: 1rem;
+  border-left: 2px solid var(--secondary-color);
+  box-shadow: 0 4px 10px rgba(255, 193, 7, 0.1);
+}
+
+.nav-mobile.open {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+
+.nav-mobile a {
+  color: var(--light);
+  margin-bottom: 1rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-mobile a:hover {
+  color: var(--secondary-color);
+}
+
+/*  ANIMACIONES */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .nav-desktop {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+}

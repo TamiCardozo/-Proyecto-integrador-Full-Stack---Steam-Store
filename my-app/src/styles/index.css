@@ -1,0 +1,30 @@
+:root {
+  --primary-dark-transparent: #37353E;
+  --primary-color: #F8DE22;
+  --primary-light: #FEF3E2;
+  --primary-dark: #000000; 
+  --secondary-color: #FFC107; 
+  --secondary-light: #D6D85D; 
+  --secondary-dark: #44444E; 
+  --light: #F9F5F0; 
+  --dark-transparent: rgba(16, 16, 16, .3);
+  --dark: #212121;
+
+  --font-bar: 'Barlow', sans-serif;
+  --font-nun: 'Nunito', sans-serif;
+  --font-asap: 'Asap', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+h1, h2 {
+  margin: 0;
+  padding: 0.5rem;
+  text-align: center;
+}

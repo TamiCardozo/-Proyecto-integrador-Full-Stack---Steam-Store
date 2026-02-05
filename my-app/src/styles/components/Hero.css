@@ -1,0 +1,227 @@
+:root {
+  --primary-dark-transparent: #37353E;
+  --primary-color: #F8DE22;
+  --primary-light: #FEF3E2;
+  --primary-dark: #000000; 
+  --secondary-color: #FFC107; 
+  --secondary-light: #D6D85D; 
+  --secondary-dark: #44444E; 
+  --light: #F9F5F0; 
+  --dark-transparent: rgba(16, 16, 16, .3);
+  --dark: #212121;
+
+  --font-bar: 'Barlow', sans-serif;
+  --font-nun: 'Nunito', sans-serif;
+  --font-asap: 'Asap', sans-serif;
+}
+
+
+.hero-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 1.5s ease, transform 2s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 40%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+.slide-content {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+  color: var(--light);
+  z-index: 2;
+  max-width: 500px;
+  font-family: var(--font-nun);
+}
+
+.hero-subtitle {
+  color: var(--secondary-color);
+  font-size: 1rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.hero-text {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.85;
+}
+
+.hero-btn {
+  background: var(--secondary-color);
+  color: var(--primary-dark);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 6px;
+}
+
+.hero-btn:hover {
+  background: var(--light);
+  color: var(--primary-dark);
+  box-shadow: 0 0 15px var(--secondary-color);
+}
+
+/* ---  ESTADÍSTICAS --- */
+
+.stats-section {
+  position: relative;
+  background: radial-gradient(circle at top, var(--dark) 0%, var(--primary-dark) 100%);
+  color: var(--light);
+  padding: 5rem 10%;
+  overflow: hidden;
+}
+
+.stats-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("/imagenes/bg-stats.webp");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  filter: blur(8px);
+  z-index: 1;
+}
+
+.stats-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+}
+
+.stats-container {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+}
+
+.stats-header h2 {
+  font-size: 2rem;
+  color: var(--secondary-color);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px var(--secondary-color);
+}
+
+.stats-header p {
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+/*  CAJAS EN FILA  */
+
+.feature-box {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.feature-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 193, 7, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 250px;
+  backdrop-filter: blur(6px);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.6);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+}
+
+.feature-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--light);
+}
+
+/*  CONTADOR SIN CAJA  */
+
+.offer-timer {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.offer-timer h3 {
+  font-size: 1.6rem;
+  color: var(--secondary-color);
+  text-shadow: 0 0 10px var(--secondary-color);
+  margin-bottom: 0.5rem;
+}
+
+.timer-display {
+  font-family: "Orbitron", sans-serif;
+  font-size: 3rem;
+  letter-spacing: 4px;
+  color: var(--light);
+  text-shadow: 0 0 15px var(--secondary-color);
+  margin-bottom: 1rem;
+}
+
+.offer-btn {
+  background: var(--secondary-color);
+  color: var(--primary-dark);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.offer-btn:hover {
+  background: var(--light);
+  box-shadow: 0 0 20px var(--secondary-color);
+}
+
+/*  RESPONSIVE  */
+
+@media (max-width: 768px) {
+  .feature-box {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .timer-display {
+    font-size: 2.2rem;
+  }
+}
