@@ -8,26 +8,19 @@ import "../styles/pages/Store.css";
 const StoreSection = ({ title, games }) => {
   const trackRef = useRef(null);
 
-  const loopGames = [...games, ...games];
-
   const scroll = (dir) => {
-    const container = trackRef.current;
-    const scrollAmount = 320;
+    if (!trackRef.current) return;
 
-    container.scrollLeft += dir === "right" ? scrollAmount : -scrollAmount;
+    const scrollAmount = 300;
 
-    if (container.scrollLeft <= 0) {
-      container.scrollLeft = container.scrollWidth / 2;
-    }
-
-    if (
-      container.scrollLeft + container.clientWidth >=
-      container.scrollWidth - 10
-    ) {
-      container.scrollLeft =
-        container.scrollWidth / 2 - container.clientWidth;
-    }
+    trackRef.current.scrollBy({
+      left: dir === "right" ? scrollAmount : -scrollAmount,
+      behavior: "smooth",
+    });
   };
+
+  // 👉 si no hay juegos, no renderiza la sección
+  if (!games || games.length === 0) return null;
 
   return (
     <section className="store-section">
@@ -39,8 +32,8 @@ const StoreSection = ({ title, games }) => {
         </button>
 
         <div className="carousel-track" ref={trackRef}>
-          {loopGames.map((game, index) => (
-            <div className="carousel-item" key={`${game.id}-${index}`}>
+          {games.map((game) => (
+            <div className="carousel-item" key={game.id}>
               <GameCard game={game} />
             </div>
           ))}
@@ -65,12 +58,7 @@ const Store = () => {
     fetch("http://localhost:4000/api/products")
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data)) {
-          setGames(data);
-        } else {
-          console.error("La API no devolvió un array:", data);
-          setGames([]);
-        }
+        setGames(Array.isArray(data) ? data : []);
       })
       .catch((err) => {
         console.error("Error cargando productos:", err);
@@ -79,16 +67,13 @@ const Store = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  // 🛡️ filtros seguros
-  const descuentos = Array.isArray(games)
-    ? games.filter((g) => g.discount > 0).slice(0, 10)
-    : [];
+  const descuentos = games.filter((g) => Number(g.discount) > 0);
 
-  const lanzamientos = Array.isArray(games)
-    ? games.filter((g) => g.is_new === 1).slice(0, 10)
-    : [];
+  const lanzamientos = games.filter(
+    (g) => g.is_new === 1 || g.is_new === true
+  );
 
-  const todos = Array.isArray(games) ? games.slice(0, 10) : [];
+  const todos = games;
 
   if (loading) {
     return <p style={{ padding: "2rem" }}>Cargando tienda...</p>;
