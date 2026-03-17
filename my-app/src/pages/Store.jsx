@@ -19,7 +19,7 @@ const StoreSection = ({ title, games }) => {
     });
   };
 
-  // 👉 si no hay juegos, no renderiza la sección
+  // No renderiza la sección si no hay juegos
   if (!games || games.length === 0) return null;
 
   return (
@@ -54,8 +54,12 @@ const Store = () => {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // ✅ Usar variable de entorno
+  const API_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
-    fetch("http://localhost:4000/api/products")
+    console.log("API_URL usada:", API_URL); // Depuración
+    fetch(`${API_URL}/api/products`)
       .then((res) => res.json())
       .then((data) => {
         setGames(Array.isArray(data) ? data : []);
@@ -65,19 +69,13 @@ const Store = () => {
         setGames([]);
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [API_URL]);
 
   const descuentos = games.filter((g) => Number(g.discount) > 0);
-
-  const lanzamientos = games.filter(
-    (g) => g.is_new === 1 || g.is_new === true
-  );
-
+  const lanzamientos = games.filter((g) => g.is_new === 1 || g.is_new === true);
   const todos = games;
 
-  if (loading) {
-    return <p style={{ padding: "2rem" }}>Cargando tienda...</p>;
-  }
+  if (loading) return <p style={{ padding: "2rem" }}>Cargando tienda...</p>;
 
   return (
     <main className="store-container">
