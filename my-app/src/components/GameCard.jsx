@@ -1,9 +1,11 @@
+// src/components/GameCard.jsx
 import { useCart } from "../context/CartContext";
 import "../styles/components/GameCard.css";
 
 const GameCard = ({ game }) => {
   const { addToCart } = useCart();
 
+  // Unificamos: title, price, discount, image
   const finalPrice = game.discount
     ? (game.price - (game.price * game.discount) / 100).toFixed(2)
     : game.price;
@@ -11,25 +13,22 @@ const GameCard = ({ game }) => {
   const handleAddToCart = () => {
     addToCart({
       ...game,
-
-      //  precio final
-      
-      price: Number(finalPrice), 
+      price: Number(finalPrice),
+      title: game.title || game.name, // Aseguramos que el carrito tenga title
+      image: game.image,             // Aseguramos que tenga la propiedad correcta
     });
   };
 
   return (
     <div className="game-card">
-      {game.discount && (
-        <span className="discount-badge">-{game.discount}%</span>
-      )}
+      {game.discount && <span className="discount-badge">-{game.discount}%</span>}
 
       <div className="game-image">
-        <img src={game.image} alt={game.title} />
+        <img src={game.image} alt={game.title || game.name} />
       </div>
 
       <div className="game-info">
-        <h4>{game.title}</h4>
+        <h4>{game.title || game.name}</h4>
 
         {game.discount ? (
           <div className="prices">
@@ -49,4 +48,3 @@ const GameCard = ({ game }) => {
 };
 
 export default GameCard;
-

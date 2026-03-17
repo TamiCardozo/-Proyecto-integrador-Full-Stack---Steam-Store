@@ -1,3 +1,4 @@
+// server.js
 import express from "express";
 import cors from "cors";
 
@@ -7,19 +8,60 @@ const PORT = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json());
 
-// Datos de prueba
+
 const products = [
-  { id: 1, name: "Juego 1", price: 50, discount: 10, is_new: true },
-  { id: 2, name: "Juego 2", price: 30, discount: 0, is_new: false },
-  { id: 3, name: "Juego 3", price: 70, discount: 20, is_new: true },
-  { id: 4, name: "Juego 4", price: 40, discount: 5, is_new: false },
-  { id: 5, name: "Juego 5", price: 60, discount: 15, is_new: true },
+  { 
+    id: 1, 
+    name: "The Last of Us", 
+    price: 50, 
+    discount: 10, 
+    is_new: true, 
+    image: "https://proyecto-integrador-full-stack-steam-store-8d6d.vercel.app/imagenes/libreria/dex3.webp" 
+  },
+  { 
+    id: 2, 
+    name: "Mortal Kombat 11", 
+    price: 30, 
+    discount: 0, 
+    is_new: false, 
+    image: "https://proyecto-integrador-full-stack-steam-store-8d6d.vercel.app/imagenes/libreria/dex6.webp" 
+  },
+  { 
+    id: 3, 
+    name: "GTA V", 
+    price: 70, 
+    discount: 20, 
+    is_new: true, 
+    image: "https://proyecto-integrador-full-stack-steam-store-8d6d.vercel.app/imagenes/libreria/dex4.webp" 
+  },
+  { 
+    id: 4, 
+    name: "Stray", 
+    price: 40, 
+    discount: 5, 
+    is_new: false, 
+    image: "https://proyecto-integrador-full-stack-steam-store-8d6d.vercel.app/imagenes/libreria/dex2.webp" 
+  },
+  { 
+    id: 5, 
+    name: "Juego 5", 
+    price: 60, 
+    discount: 15, 
+    is_new: true, 
+    image: "https://proyecto-integrador-full-stack-steam-store-8d6d.vercel.app/imagenes/libreria/bg-stats.webp" 
+  },
 ];
 
+// =========================
+// Endpoint de productos
+// =========================
 app.get("/api/products", (req, res) => {
   res.json(products);
 });
 
+// =========================
+// Servidor
+// =========================
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
 });
