@@ -8,7 +8,7 @@ const StoreSection = ({ title, games }) => {
 
   const scroll = (dir) => {
     if (!trackRef.current) return;
-    const scrollAmount = 300; // ajuste de velocidad
+    const scrollAmount = 300;
     trackRef.current.scrollBy({
       left: dir === "right" ? scrollAmount : -scrollAmount,
       behavior: "smooth",
@@ -39,7 +39,7 @@ const Store = () => {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Variable de entorno que apunta a tu backend en Render
+  //  Render
   const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {

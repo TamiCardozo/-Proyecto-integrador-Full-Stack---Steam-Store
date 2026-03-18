@@ -22,7 +22,7 @@ const juegos = [
     modo: "Online / PC, PS5, Móvil",
     calificacion: 4,
     descripcion:
-      "El juego presenta un épico modo historia cinemático donde la guardiana del tiempo, Kronika, desata una crisis temporal, forzando a los luchadores del pasado y del presente (como Scorpion y Sub-Zero) a enfrentarse..",
+      "El juego presenta un épico modo historia cinemático donde la guardiana del tiempo, Kronika, desata una crisis temporal.",
     detalle:
       "Mortal Kombat 11 es la entrega más sangrienta y visualmente impactante de la icónica saga de lucha.",
     imagen: "/imagenes/libreria/dex6.webp",
@@ -34,21 +34,21 @@ const juegos = [
     modo: "Multijugador / PC, PS4, Xbox",
     calificacion: 4,
     descripcion:
-      "Un juego sandbox con una vasta ciudad para explorar y misiones narrativas. Sigue siendo un éxito de ventas a pesar de su antigüedad.",
+      "Un juego sandbox con una vasta ciudad para explorar y misiones narrativas.",
     detalle:
-      "Su inmenso mundo abierto detallado, su sátira social, y la evolución constante de su modo online..",
-    imagen: "/imagenes/libreria/dex4.webp",
+      "Su inmenso mundo abierto detallado y su modo online lo mantienen vigente.",
+    imagen: "/public/imagenes/libreria/dex4.webp",
   },
   {
     id: 4,
     titulo: "Stray",
-    categoria: "Aventura, Puzles, Exploración, Plataformas",
-    modo: "Multijugador / Consolas y PC",
+    categoria: "Aventura, Puzles, Exploración",
+    modo: "Consolas y PC",
     calificacion: 5,
     descripcion:
-      "Stray es una singular aventura ambientada en una decadente ciudad ciberpunk donde controlas a un gato callejero que debe explorar, resolver puzles y escapar de peligrosos parásitos para encontrar el camino de regreso a la superficie.",
+      "Controlas a un gato en una ciudad ciberpunk resolviendo puzles.",
     detalle:
-      "Su principal encanto reside en la exploración vertical y en experimentar el mundo a través de los movimientos y travesuras de un felino realista.",
+      "Exploración única desde la perspectiva de un felino.",
     imagen: "/imagenes/libreria/dex2.webp",
   },
 ];
@@ -76,6 +76,7 @@ const CardsSection = () => {
       <h2 className="cards-title">
         JUEGOS <span>DESTACADOS</span>
       </h2>
+
       <p className="cards-description">
         Descubrí y disfrutá de experiencias únicas en cada partida.
       </p>
@@ -99,7 +100,13 @@ const CardsSection = () => {
             return (
               <div key={juego.id} className={`card ${posicion}`}>
                 <div className="card-image">
-                  <img src={juego.imagen} alt={juego.titulo} />
+                  <img
+                    src={juego.imagen}
+                    alt={juego.titulo}
+                    onError={(e) => {
+                      e.target.src = "/imagenes/libreria/default.webp";
+                    }}
+                  />
                 </div>
 
                 <div className="card-info">
@@ -107,10 +114,12 @@ const CardsSection = () => {
                   <p className="card-category">{juego.categoria}</p>
                   <p className="card-mode">{juego.modo}</p>
                   <p className="card-description">{juego.descripcion}</p>
+
                   <div className="card-rating">
                     {"★".repeat(juego.calificacion)}
                     {"☆".repeat(5 - juego.calificacion)}
                   </div>
+
                   <button
                     className="card-btn"
                     onClick={() => setJuegoSeleccionado(juego)}
@@ -128,8 +137,7 @@ const CardsSection = () => {
         </button>
       </div>
 
-      {/* Modal */}
-      
+      {/* MODAL */}
       {juegoSeleccionado && (
         <div
           className="modal-overlay"
@@ -142,16 +150,26 @@ const CardsSection = () => {
             >
               ✖
             </button>
+
             <img
               src={juegoSeleccionado.imagen}
               alt={juegoSeleccionado.titulo}
               className="modal-image"
+              onError={(e) => {
+                e.target.src = "/imagenes/libreria/default.webp";
+              }}
             />
+
             <h3>{juegoSeleccionado.titulo}</h3>
-            <p className="modal-category">{juegoSeleccionado.categoria}</p>
-            <p className="modal-detail">{juegoSeleccionado.detalle}</p>
+            <p className="modal-category">
+              {juegoSeleccionado.categoria}
+            </p>
+            <p className="modal-detail">
+              {juegoSeleccionado.detalle}
+            </p>
+
             <button className="modal-btn" onClick={irATienda}>
-              EXPLORAR
+              IR A LA TIENDA
             </button>
           </div>
         </div>
