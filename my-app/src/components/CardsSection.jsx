@@ -13,7 +13,7 @@ const juegos = [
       "El juego combina un combate brutal con una intensa necesidad de sigilo y gestión de recursos escasos, creando una atmósfera de tensión constante.",
     detalle:
       "Más que un juego de zombis, es un drama humano profundo sobre la pérdida, la moralidad gris y hasta dónde se puede llegar por amor.",
-    imagen: "my-app/public/imagenes/libreria/dex3.webp",
+    imagen: "my-app/public/imagenes/imag1.webp",
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ const juegos = [
       "El juego presenta un épico modo historia cinemático donde la guardiana del tiempo, Kronika, desata una crisis temporal.",
     detalle:
       "Mortal Kombat 11 es la entrega más sangrienta y visualmente impactante de la icónica saga de lucha.",
-    imagen: "my-app/public/imagenes/libreria/dex6.webp",
+    imagen: "my-app/public/imagenes/imag2.webp",
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ const juegos = [
       "Un juego sandbox con una vasta ciudad para explorar y misiones narrativas.",
     detalle:
       "Su inmenso mundo abierto detallado y su modo online lo mantienen vigente.",
-    imagen: "my-app/public/imagenes/libreria/dex4.webp",
+    imagen: "my-app/public/imagenes/imag.webp",
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ const juegos = [
       "Controlas a un gato en una ciudad ciberpunk resolviendo puzles.",
     detalle:
       "Exploración única desde la perspectiva de un felino.",
-    imagen:"my-app/public/imagenes/libreria/dex2.webp",
+    imagen:"my-app/public/imagenes/imag3.webp",
   },
 ];
 
