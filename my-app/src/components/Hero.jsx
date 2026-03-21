@@ -1,143 +1,157 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; 
-import { FaHeart, FaUsers, FaGamepad } from "react-icons/fa";
-import "../styles/components/Hero.css";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../styles/components/CardsSection.css";
 
-const slides = [
+const juegos = [
   {
     id: 1,
-    title: "Crea y gestiona partidas",
-    subtitle: "Encontrá jugadores o tecnología para tus proyectos digitales",
-    image: "/imagenes/game1.webp",
+    titulo: "The Last of Us",
+    categoria: "Acción-Aventura, Supervivencia, Survival Horror",
+    modo: "Multijugador / PS5, Xbox, PC",
+    calificacion: 5,
+    descripcion:
+      "El juego combina un combate brutal con una intensa necesidad de sigilo.",
+    detalle:
+      "Más que un juego de zombis, es un drama humano profundo.",
+    imagen: "/imagenes/imag1.webp",
   },
   {
     id: 2,
-    title: "Liberá tu poder",
-    subtitle: "Competí y dominá en cada batalla",
-    image: "/imagenes/game2.webp",
+    titulo: "Mortal Kombat 11",
+    categoria: "Lucha, Gore, Fantasía",
+    modo: "Online / PC, PS5, Móvil",
+    calificacion: 4,
+    descripcion:
+      "Modo historia cinemático con crisis temporal.",
+    detalle:
+      "La entrega más sangrienta de la saga.",
+    imagen: "/imagenes/imag2.webp",
   },
   {
     id: 3,
-    title: "Unite a la revolución",
-    subtitle: "Donde cada partida es una nueva historia",
-    image: "/imagenes/game3.webp",
+    titulo: "GTA V",
+    categoria: "Acción-Aventura, Mundo Abierto",
+    modo: "Multijugador / PC, PS4, Xbox",
+    calificacion: 4,
+    descripcion:
+      "Sandbox con ciudad enorme.",
+    detalle:
+      "Mundo abierto detallado y online activo.",
+    imagen: "/imagenes/imag.webp",
+  },
+  {
+    id: 4,
+    titulo: "Stray",
+    categoria: "Aventura, Exploración",
+    modo: "PC y Consolas",
+    calificacion: 5,
+    descripcion:
+      "Controlás un gato en una ciudad ciberpunk.",
+    detalle:
+      "Exploración única felina.",
+    imagen: "/imagenes/imag3.webp",
   },
 ];
 
-const Hero = () => {
+const CardsSection = () => {
   const [actual, setActual] = useState(0);
-  const [statsVisible, setStatsVisible] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(3600); 
+  const [juegoSeleccionado, setJuegoSeleccionado] = useState(null);
+  const navigate = useNavigate();
 
-  // presentacion de imagenes
+  const siguiente = () => {
+    setActual((prev) => (prev + 1) % juegos.length);
+  };
 
-  useEffect(() => {
-    const intervalo = setInterval(() => {
-      setActual((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(intervalo);
-  }, []);
+  const anterior = () => {
+    setActual((prev) => (prev - 1 + juegos.length) % juegos.length);
+  };
 
-  //  scroll 
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const section = document.getElementById("statsSection");
-      if (section) {
-        const rect = section.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 150) {
-          setStatsVisible(true);
-        }
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Contador reloj
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const formatTime = (seconds) => {
-    const hrs = Math.floor(seconds / 3600);
-    const mins = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
-    return `${hrs.toString().padStart(2, "0")}:${mins
-      .toString()
-      .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+  const irATienda = () => {
+    setJuegoSeleccionado(null);
+    navigate("/store");
   };
 
   return (
-    <>
-      {/* HERO  */}
+    <section className="cards-section">
+      <h2 className="cards-title">
+        JUEGOS <span>DESTACADOS</span>
+      </h2>
 
-      <section className="hero-section">
-        {slides.map((slide, index) => (
-          <div
-            key={slide.id}
-            className={`slide ${index === actual ? "active" : ""}`}
-            style={{ backgroundImage: `url(${slide.image})` }}
-          >
-            <div className="hero-overlay" />
-            <div className="slide-content">
-              <h2 className="hero-subtitle">ZONA GAMING</h2>
-              <h1 className="hero-title">{slide.title}</h1>
-              <p className="hero-text">{slide.subtitle}</p>
-              <Link to="/about" className="hero-btn" style={{ textDecoration: 'none', display: 'inline-block', textAlign: 'center' }}>
-                CONOCENOS
-              </Link>
-            </div>
-          </div>
-        ))}
-      </section>
+      <div className="carousel-container">
+        <button className="carousel-btn left" onClick={anterior}>
+          ❮
+        </button>
 
-      <section id="statsSection" className="stats-section">
-        <div className="stats-bg" />
-        <div className="stats-overlay" />
-        <div className="stats-container">
-          <div className={`stats-left ${statsVisible ? "fade-in" : ""}`}>
-            <div className="stats-header">
-              <h2>Nuestra comunidad gamer sigue creciendo</h2>
-              <p>Saca al maximo las experiencias que podes vivir  en Zona Gaming</p>
-            </div>
+        <div className="carousel">
+          {juegos.map((juego, index) => {
+            const posicion =
+              index === actual
+                ? "active"
+                : index === (actual - 1 + juegos.length) % juegos.length
+                ? "prev"
+                : index === (actual + 1) % juegos.length
+                ? "next"
+                : "hidden";
 
-            <div className="feature-box">
-              <div className="feature-item">
-                <FaGamepad className="feature-icon" />
-                <h3 className="feature-title">Batallas Dinámicas</h3>
+            return (
+              <div key={juego.id} className={`card ${posicion}`}>
+                <div className="card-image">
+                  <img
+                    src={juego.imagen}
+                    alt={juego.titulo}
+                    onError={(e) => {
+                      e.target.src = "/imagenes/default.webp";
+                    }}
+                  />
+                </div>
+
+                <div className="card-info">
+                  <h3>{juego.titulo}</h3>
+                  <p>{juego.categoria}</p>
+                  <p>{juego.descripcion}</p>
+
+                  <div>
+                    {"★".repeat(juego.calificacion)}
+                    {"☆".repeat(5 - juego.calificacion)}
+                  </div>
+
+                  <button onClick={() => setJuegoSeleccionado(juego)}>
+                    EXPLORAR
+                  </button>
+                </div>
               </div>
+            );
+          })}
+        </div>
 
-              <div className="feature-item">
-                <FaHeart className="feature-icon" />
-                <h3 className="feature-title">Atmósfera Increíble</h3>
-              </div>
+        <button className="carousel-btn right" onClick={siguiente}>
+          ❯
+        </button>
+      </div>
 
-              <div className="feature-item">
-                <FaUsers className="feature-icon" />
-                <h3 className="feature-title">Jugá con tus Amigos</h3>
-              </div>
-            </div>
+      {juegoSeleccionado && (
+        <div
+          className="modal-overlay"
+          onClick={() => setJuegoSeleccionado(null)}
+        >
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={juegoSeleccionado.imagen}
+              alt={juegoSeleccionado.titulo}
+              onError={(e) => {
+                e.target.src = "/imagenes/default.webp";
+              }}
+            />
 
-            {/* reloj de ofertas */}
-            
-            <div className="offer-timer">
-              <h3>🔥 DESCUENTOS Y OFERTAS 🔥</h3>
-              <h4>Hasta un 5% 10% de Descuentos </h4>
-              <div className="timer-display">{formatTime(timeLeft)}</div>
-              <Link to="/store" className="offer-btn" style={{ textDecoration: 'none', display: 'inline-block', textAlign: 'center' }}>
-                VER MÁS
-              </Link>
-            </div>
+            <h3>{juegoSeleccionado.titulo}</h3>
+            <p>{juegoSeleccionado.detalle}</p>
+
+            <button onClick={irATienda}>IR A LA TIENDA</button>
           </div>
         </div>
-      </section>
-    </>
+      )}
+    </section>
   );
 };
 
-export default Hero;
+export default CardsSection;

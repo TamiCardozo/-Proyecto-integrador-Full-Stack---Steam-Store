@@ -104,7 +104,7 @@ const CardsSection = () => {
                     src={juego.imagen}
                     alt={juego.titulo}
                     onError={(e) => {
-                      e.target.src = "/imagenes/libreria/default.webp";
+                      e.target.src = "my-app/public/imagenes/default.webp";
                     }}
                   />
                 </div>
@@ -156,7 +156,7 @@ const CardsSection = () => {
               alt={juegoSeleccionado.titulo}
               className="modal-image"
               onError={(e) => {
-                e.target.src = "/imagenes/libreria/default.webp";
+                e.target.src = "my-app/public/imagenes/default.webp";
               }}
             />
 
