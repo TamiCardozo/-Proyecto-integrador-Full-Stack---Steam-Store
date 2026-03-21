@@ -10,10 +10,10 @@ const juegos = [
     modo: "Multijugador / PS5, Xbox, PC",
     calificacion: 5,
     descripcion:
-      "El juego combina un combate brutal con una intensa necesidad de sigilo y gestión de recursos escasos, creando una atmósfera de tensión constante.",
+      "El juego combina un combate brutal con una intensa necesidad de sigilo.",
     detalle:
-      "Más que un juego de zombis, es un drama humano profundo sobre la pérdida, la moralidad gris y hasta dónde se puede llegar por amor.",
-    imagen: "my-app/public/imagenes/imag1.webp",
+      "Más que un juego de zombis, es un drama humano profundo.",
+    imagen: "/imagenes/imag1.webp",
   },
   {
     id: 2,
@@ -22,34 +22,34 @@ const juegos = [
     modo: "Online / PC, PS5, Móvil",
     calificacion: 4,
     descripcion:
-      "El juego presenta un épico modo historia cinemático donde la guardiana del tiempo, Kronika, desata una crisis temporal.",
+      "Modo historia cinemático con crisis temporal.",
     detalle:
-      "Mortal Kombat 11 es la entrega más sangrienta y visualmente impactante de la icónica saga de lucha.",
-    imagen: "my-app/public/imagenes/imag2.webp",
+      "La entrega más sangrienta de la saga.",
+    imagen: "/imagenes/imag2.webp",
   },
   {
     id: 3,
-    titulo: "Grand Theft Auto V (GTA V)",
+    titulo: "GTA V",
     categoria: "Acción-Aventura, Mundo Abierto",
     modo: "Multijugador / PC, PS4, Xbox",
     calificacion: 4,
     descripcion:
-      "Un juego sandbox con una vasta ciudad para explorar y misiones narrativas.",
+      "Sandbox con ciudad enorme.",
     detalle:
-      "Su inmenso mundo abierto detallado y su modo online lo mantienen vigente.",
-    imagen: "my-app/public/imagenes/imag.webp",
+      "Mundo abierto detallado y online activo.",
+    imagen: "/imagenes/imag.webp",
   },
   {
     id: 4,
     titulo: "Stray",
-    categoria: "Aventura, Puzles, Exploración",
-    modo: "Consolas y PC",
+    categoria: "Aventura, Exploración",
+    modo: "PC y Consolas",
     calificacion: 5,
     descripcion:
-      "Controlas a un gato en una ciudad ciberpunk resolviendo puzles.",
+      "Controlás un gato en una ciudad ciberpunk.",
     detalle:
-      "Exploración única desde la perspectiva de un felino.",
-    imagen:"my-app/public/imagenes/imag3.webp",
+      "Exploración única felina.",
+    imagen: "/imagenes/imag3.webp",
   },
 ];
 
@@ -77,10 +77,6 @@ const CardsSection = () => {
         JUEGOS <span>DESTACADOS</span>
       </h2>
 
-      <p className="cards-description">
-        Descubrí y disfrutá de experiencias únicas en cada partida.
-      </p>
-
       <div className="carousel-container">
         <button className="carousel-btn left" onClick={anterior}>
           ❮
@@ -104,26 +100,22 @@ const CardsSection = () => {
                     src={juego.imagen}
                     alt={juego.titulo}
                     onError={(e) => {
-                      e.target.src = "my-app/public/imagenes/default.webp";
+                      e.target.src = "/imagenes/default.webp";
                     }}
                   />
                 </div>
 
                 <div className="card-info">
                   <h3>{juego.titulo}</h3>
-                  <p className="card-category">{juego.categoria}</p>
-                  <p className="card-mode">{juego.modo}</p>
-                  <p className="card-description">{juego.descripcion}</p>
+                  <p>{juego.categoria}</p>
+                  <p>{juego.descripcion}</p>
 
-                  <div className="card-rating">
+                  <div>
                     {"★".repeat(juego.calificacion)}
                     {"☆".repeat(5 - juego.calificacion)}
                   </div>
 
-                  <button
-                    className="card-btn"
-                    onClick={() => setJuegoSeleccionado(juego)}
-                  >
+                  <button onClick={() => setJuegoSeleccionado(juego)}>
                     EXPLORAR
                   </button>
                 </div>
@@ -137,40 +129,24 @@ const CardsSection = () => {
         </button>
       </div>
 
-      {/* MODAL */}
       {juegoSeleccionado && (
         <div
           className="modal-overlay"
           onClick={() => setJuegoSeleccionado(null)}
         >
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button
-              className="modal-close"
-              onClick={() => setJuegoSeleccionado(null)}
-            >
-              ✖
-            </button>
-
             <img
               src={juegoSeleccionado.imagen}
               alt={juegoSeleccionado.titulo}
-              className="modal-image"
               onError={(e) => {
-                e.target.src = "my-app/public/imagenes/default.webp";
+                e.target.src = "/imagenes/default.webp";
               }}
             />
 
             <h3>{juegoSeleccionado.titulo}</h3>
-            <p className="modal-category">
-              {juegoSeleccionado.categoria}
-            </p>
-            <p className="modal-detail">
-              {juegoSeleccionado.detalle}
-            </p>
+            <p>{juegoSeleccionado.detalle}</p>
 
-            <button className="modal-btn" onClick={irATienda}>
-              IR A LA TIENDA
-            </button>
+            <button onClick={irATienda}>IR A LA TIENDA</button>
           </div>
         </div>
       )}
