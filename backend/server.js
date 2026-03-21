@@ -1,4 +1,3 @@
-// server.js
 import express from "express";
 import cors from "cors";
 
@@ -8,11 +7,10 @@ const PORT = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json());
 
-
 const products = [
   { 
     id: 1, 
-    name: "The Last of Us", 
+    title: "The Last of Us", 
     price: 50, 
     discount: 10, 
     is_new: true, 
@@ -20,7 +18,7 @@ const products = [
   },
   { 
     id: 2, 
-    name: "Mortal Kombat 11", 
+    title: "Mortal Kombat 11", 
     price: 30, 
     discount: 0, 
     is_new: false, 
@@ -28,7 +26,7 @@ const products = [
   },
   { 
     id: 3, 
-    name: "GTA V", 
+    title: "GTA V", 
     price: 70, 
     discount: 20, 
     is_new: true, 
@@ -36,7 +34,7 @@ const products = [
   },
   { 
     id: 4, 
-    name: "Stray", 
+    title: "Stray", 
     price: 40, 
     discount: 5, 
     is_new: false, 
@@ -44,7 +42,7 @@ const products = [
   },
   { 
     id: 5, 
-    name: "Juego 5", 
+    title: "Juego 5", 
     price: 60, 
     discount: 15, 
     is_new: true, 
@@ -52,16 +50,10 @@ const products = [
   },
 ];
 
-// =========================
-// Endpoint de productos
-// =========================
 app.get("/api/products", (req, res) => {
   res.json(products);
 });
 
-// =========================
-// Servidor
-// =========================
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
 });
