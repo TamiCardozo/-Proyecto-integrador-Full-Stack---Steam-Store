@@ -33,7 +33,7 @@
 .game-image img {
   width: 100%;
   height: 220px;
-  object-fit: contain; /* 🔑 nunca se corta */
+  object-fit: contain; 
 }
 
 /* INFO */
