@@ -22,7 +22,7 @@ const products = [
     price: 30, 
     discount: 0, 
     is_new: false, 
-    image: "/imagenes/libreria/dex6.webp" 
+    image: "/imagenes/libreria/juego3.webp" 
   },
   { 
     id: 3, 
@@ -30,7 +30,7 @@ const products = [
     price: 70, 
     discount: 20, 
     is_new: true, 
-    image: "/imagenes/libreria/dex4.webp" 
+    image: "/imagenes/libreria/juego4.webp" 
   },
   { 
     id: 4, 
@@ -38,15 +38,7 @@ const products = [
     price: 40, 
     discount: 5, 
     is_new: false, 
-    image: "/imagenes/libreria/dex2.webp" 
-  },
-  { 
-    id: 5, 
-    title: "Juego 5", 
-    price: 60, 
-    discount: 15, 
-    is_new: true, 
-    image: "/imagenes/libreria/bg-stats.webp" 
+    image: "/imagenes/libreria/juego2.webp" 
   },
 ];
 
