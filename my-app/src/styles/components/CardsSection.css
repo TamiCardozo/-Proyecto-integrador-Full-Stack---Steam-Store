@@ -1,3 +1,4 @@
+/* --- SECCIÓN GENERAL --- */
 .cards-section {
   text-align: center;
   color: var(--light);
@@ -11,6 +12,7 @@
   text-shadow: 0 0 10px var(--secondary-color);
 }
 
+/* --- CONTENEDOR DEL CARRUSEL --- */
 .carousel-container {
   position: relative;
   display: flex;
@@ -28,86 +30,110 @@
   align-items: center;
 }
 
-/* CARDS DEL CARRUSEL */
+/* --- ESTILO DE LAS CARDS --- */
 .card {
   width: 300px;
   margin: 0 1rem;
   opacity: 0;
   transform: scale(0.8);
-  transition: all 0.5s ease;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Transición más fluida */
   background: var(--primary-dark-transparent, rgba(20, 20, 20, 0.8));
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
 }
 
+/* Estados del Carrusel */
 .card.active { opacity: 1; transform: scale(1); }
 .card.prev, .card.next { opacity: 0.6; transform: scale(0.9); }
 .card.hidden { display: none; }
 
+/* --- EFECTO HOVER EN LA CARD (Zoom y Resplandor) --- */
+.card:hover {
+  box-shadow: 0 0 25px var(--primary-color); /* Resplandor exterior */
+  border: 1px solid var(--primary-color);
+  transform: translateY(-5px) scale(1.02); /* Sube un poquito */
+}
+
 .card-image {
   width: 100%;
   height: 180px;
-  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Importante para que el zoom no se salga */
 }
 
 .card-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* <--- NO SE CORTA LA IMAGEN */
+  transition: transform 0.5s ease; /* Suavidad del zoom */
+  display: block;
+  padding: 10px; /* Espacio para que respire la imagen */
+}
+
+.card:hover .card-image img {
+  transform: scale(1.15); /* Zoom de la imagen al pasar el mouse */
 }
 
 .card-info { padding: 1.5rem; }
 .card-info h3 { color: var(--primary-color); margin-bottom: 0.5rem; }
-.stars { color: #f1c40f; margin-bottom: 1rem; }
+.stars { color: #f1c40f; margin-bottom: 1rem; font-size: 1.2rem; }
 
 .card-btn {
   background: var(--primary-color);
   border: none;
-  padding: 0.6rem 1.5rem;
+  padding: 0.7rem 1.5rem;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
   color: white;
   transition: 0.3s;
+  text-transform: uppercase;
 }
 
-/* MODAL CORREGIDO - IMAGEN PEQUEÑA */
+/* --- MODAL (Ventana de Explorar) --- */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2000;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
 }
 
 .modal-content {
-  background: #1a1a1a;
+  background: #121212;
   color: white;
   padding: 2.5rem 2rem;
   border-radius: 15px;
   width: 90%;
-  max-width: 450px; /* Ancho controlado del modal */
+  max-width: 450px;
   position: relative;
   text-align: center;
-  box-shadow: 0 0 30px rgba(0,0,0,0.7);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .modal-content img {
   width: 100%;
-  max-width: 280px;    /* <-- AQUÍ LIMITAMOS EL ANCHO */
-  height: 160px;       /* <-- AQUÍ LIMITAMOS EL ALTO */
-  object-fit: cover;   /* Para que no se estire */
+  max-width: 250px; /* <--- TAMAÑO CONTROLADO */
+  height: 160px;    /* <--- TAMAÑO CONTROLADO */
+  object-fit: contain; /* <--- NO SE CORTA */
   border-radius: 10px;
   margin: 0 auto 1.5rem;
   display: block;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));
 }
 
 .modal-close {
@@ -116,11 +142,13 @@
   right: 15px;
   background: none;
   border: none;
-  color: white;
+  color: #888;
   font-size: 2rem;
   cursor: pointer;
-  line-height: 1;
+  transition: 0.3s;
 }
+
+.modal-close:hover { color: white; transform: rotate(90deg); }
 
 .modal-btn {
   margin-top: 1.5rem;
@@ -132,12 +160,35 @@
   font-weight: bold;
   cursor: pointer;
   width: 100%;
+  transition: 0.3s;
 }
 
-/* RESPONSIVE */
+.modal-btn:hover {
+  background: var(--primary-color);
+  box-shadow: 0 0 15px var(--primary-color);
+}
+
+/* --- BOTONES LATERALES DEL CARRUSEL --- */
+.carousel-btn {
+  background: transparent;
+  border: none;
+  color: var(--primary-color);
+  font-size: 3rem;
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 10;
+  padding: 0 20px;
+}
+
+.carousel-btn:hover {
+  color: white;
+  transform: scale(1.2);
+}
+
+/* --- RESPONSIVE --- */
 @media (max-width: 768px) {
-  .card { width: 85%; margin: 1rem 0; }
+  .card { width: 80%; margin: 1rem 0; }
   .card.prev, .card.next { display: none; }
-  .modal-content { padding: 1.5rem; }
+  .modal-content { padding: 2rem 1.5rem; }
   .modal-content img { max-width: 200px; height: 130px; }
 }
