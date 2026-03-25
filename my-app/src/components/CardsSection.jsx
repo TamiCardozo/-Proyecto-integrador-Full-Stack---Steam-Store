@@ -97,7 +97,6 @@ const CardsSection = () => {
         <button className="carousel-btn right" onClick={siguiente}>❯</button>
       </div>
 
-      {/* MODAL CORREGIDO */}
       {juegoSeleccionado && (
         <div className="modal-overlay" onClick={() => setJuegoSeleccionado(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
