@@ -1,5 +1,4 @@
-// Store.jsx
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useMemo } from "react"; // Agregamos useMemo
 import GameCard from "../components/GameCard";
 import "../styles/pages/Store.css";
 
@@ -8,7 +7,7 @@ const StoreSection = ({ title, games }) => {
 
   const scroll = (dir) => {
     if (!trackRef.current) return;
-    const scrollAmount = 300;
+    const scrollAmount = 400; // Un poquito más para que avance mejor
     trackRef.current.scrollBy({
       left: dir === "right" ? scrollAmount : -scrollAmount,
       behavior: "smooth",
@@ -38,33 +37,44 @@ const StoreSection = ({ title, games }) => {
 const Store = () => {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  //  Render
   const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch(`${API_URL}/api/products`)
+    // Usamos AbortController para cancelar la petición si el usuario se va de la página
+    const controller = new AbortController();
+    
+    fetch(`${API_URL}/api/products`, { signal: controller.signal })
       .then((res) => res.json())
-      .then((data) => setGames(Array.isArray(data) ? data : []))
-      .catch((err) => {
-        console.error("Error cargando productos:", err);
-        setGames([]);
+      .then((data) => {
+        setGames(Array.isArray(data) ? data : []);
+        setLoading(false);
       })
-      .finally(() => setLoading(false));
+      .catch((err) => {
+        if (err.name !== 'AbortError') {
+          console.error("Error cargando productos:", err);
+          setLoading(false);
+        }
+      });
+
+    return () => controller.abort();
   }, [API_URL]);
 
-  const descuentos = games.filter((g) => Number(g.discount) > 0);
-  const lanzamientos = games.filter((g) => g.is_new === true || g.is_new === 1);
-  const todos = games;
+  // OPTIMIZACIÓN: Solo filtramos si 'games' cambia
+  const { descuentos, lanzamientos } = useMemo(() => {
+    return {
+      descuentos: games.filter((g) => Number(g.discount) > 0),
+      lanzamientos: games.filter((g) => g.is_new === true || g.is_new === 1)
+    };
+  }, [games]);
 
-  if (loading) return <p style={{ padding: "2rem" }}>Cargando tienda...</p>;
+  if (loading) return <div className="loading-spinner">Cargando tienda...</div>;
 
   return (
     <main className="store-container">
       <h2>Tienda de Videojuegos 🎮</h2>
       <StoreSection title="🔥 Descuentos" games={descuentos} />
       <StoreSection title="🚀 Lanzamientos" games={lanzamientos} />
-      <StoreSection title="🕹️ Todos los Juegos" games={todos} />
+      <StoreSection title="🕹️ Todos los Juegos" games={games} />
     </main>
   );
 };

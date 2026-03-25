@@ -105,6 +105,7 @@ const CardsSection = () => {
             <img 
               src={juegoSeleccionado.imagen} 
               alt={juegoSeleccionado.titulo}
+              loading="lazy"
               onError={(e) => { e.target.src = "/imagenes/default.webp"; }}
             />
 
