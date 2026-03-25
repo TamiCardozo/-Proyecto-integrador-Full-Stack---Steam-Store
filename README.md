@@ -60,83 +60,9 @@ integrador-back-end/
 │
 ├── README.md
 └── .gitignore
-## ▶️ Cómo ejecutar el proyecto localmente (ya que fue por XAMPP)
-
-### 1️⃣ Clonar el repositorio
-
-```bash
-git clone https://github.com/TamiCardozo/-Proyecto-integrador-Full-Stack---Steam-Store.git
-cd integrador-back-end
-2️⃣ Configurar el backend
-
-Ingresar a la carpeta backend:
-
-cd backend
 
 
-Instalar dependencias:
-
-npm install
-
-
-Crear un archivo .env con las siguientes variables:
-
-PORT=4000
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=tu_password
-DB_NAME=steam-store
-JWT_SECRET=tu_secreto
-
-
-Levantar el servidor:
-
-npm run dev
-
-
-El backend quedará corriendo en:
-
-http://localhost:4000
-
-3️⃣ Configurar el frontend
-
-Ingresar a la carpeta del frontend:
-
-cd my-app
-
-
-Instalar dependencias:
-
-npm install
-
-
-Levantar el proyecto:
-
-npm run dev
-
-
-El frontend se visualizará en:
-
-http://localhost:5173
-
-🌐 Endpoints principales
-
-GET /api/products → Obtener productos
-
-POST /api/auth/register → Registro de usuario
-
-POST /api/auth/login → Login de usuario
-
-POST /api/orders → Crear orden de compra (endpoint protegido)
-
-☁️ Deploy
-
-Frontend: Vercel
-
-Backend: Node.js + Express
-
-Base de datos: MySQL (local)
-
+gi
 El objetivo del proyecto es demostrar la integración completa entre frontend, backend y base de datos.
 
 🧑‍💻 Autor/a
